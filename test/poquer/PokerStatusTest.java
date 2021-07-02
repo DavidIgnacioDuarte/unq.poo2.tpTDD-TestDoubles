@@ -21,6 +21,9 @@ class PokerStatusTest {
 	String corazones12;
 	String picas10;
 	
+	String diamantes4;
+	String diamantes5;
+	
 	
 	//SETUP Y TEARDOWN A LA VEZ(AL SER BEFOREACH)//
 	@BeforeEach
@@ -40,6 +43,9 @@ class PokerStatusTest {
 		corazones12 = "12C";
 		picas10 = "10P";
 		
+		diamantes4 = "4D";
+		diamantes5 = "5D";
+		
 	}
 	
 
@@ -48,18 +54,18 @@ class PokerStatusTest {
 	void hayPokerDeAses() {
 		
 		//EXERCISE//
-		boolean resultado = pokerStatus.verificar(picas1, corazones1, corazones3, diamantes1, treboles1);
+		String resultado = pokerStatus.verificar(picas1, corazones1, corazones3, diamantes1, treboles1);
 		
 		//VERIFY//
-		assertTrue(resultado);
+		assertEquals("Poker", resultado);
 		
 		resultado = pokerStatus.verificar(diamantes1, picas2, picas1, corazones1, treboles1);
 		
-		assertTrue(resultado);
+		assertEquals("Poker", resultado);
 		
 		resultado = pokerStatus.verificar(corazones1, diamantes1, diamantes11, picas1, treboles1);
 		
-		assertTrue(resultado);
+		assertEquals("Poker", resultado);
 		
 	}
 	
@@ -69,18 +75,96 @@ class PokerStatusTest {
 	void noHayPoker() {
 		
 		//EXERCISE//
-		boolean resultado = pokerStatus.verificar(picas1, corazones1, corazones3, diamantes3, treboles1);
+		String resultado = pokerStatus.verificar(picas1, corazones1, corazones3, diamantes3, treboles1);
 				
 		//VERIFY//
-		assertFalse(resultado);
+		assertNotEquals("Poker", resultado);
 		
 		resultado = pokerStatus.verificar(corazones12, picas10, diamantes11, picas1, treboles1);
 		
-		assertFalse(resultado);
+		assertNotEquals("Poker", resultado);
 		
 		resultado = pokerStatus.verificar(picas1, diamantes1, treboles1, corazones12, corazones3);
 		
-		assertFalse(resultado);
+		assertNotEquals("Poker", resultado);
+		
+	}
+	
+	
+	@Test
+	void hayColor() {
+		
+		//EXERCISE//
+		String resultado = pokerStatus.verificar(diamantes1, diamantes11, diamantes3, diamantes4, diamantes5);
+				
+		//VERIFY//
+		assertEquals("Color", resultado);
+		
+		
+		//DIFERENTE ORDEN
+		resultado = pokerStatus.verificar(diamantes11, diamantes3, diamantes1, diamantes5, diamantes4);
+		
+		assertEquals("Color", resultado);
+		
+	}
+	
+	
+	@Test
+	void noHayColor() {
+		
+		//EXERCISE//
+		String resultado = pokerStatus.verificar(diamantes1, diamantes11, diamantes3, diamantes4, picas1);
+						
+		//VERIFY//
+		assertNotEquals("Color", resultado);
+		
+		resultado = pokerStatus.verificar(corazones12, diamantes11, diamantes3, diamantes4, picas1);
+		
+		assertNotEquals("Color", resultado);
+		
+	}
+	
+	
+	@Test
+	void hayTrio() {
+		
+		//EXERCISE//
+		String resultado = pokerStatus.verificar(diamantes1, diamantes11, diamantes3, corazones1, picas1);
+								
+		//VERIFY//
+		assertEquals("Trio", resultado);
+		
+		resultado = pokerStatus.verificar(corazones12, corazones3, treboles1, corazones1, picas1);
+		
+		assertEquals("Trio", resultado);
+		
+	}
+	
+	
+	@Test
+	void noHayTrio() {
+		
+		//Hay Poker
+		String resultado = pokerStatus.verificar(diamantes1, treboles1, diamantes3, corazones1, picas1);
+
+		assertNotEquals("Trio", resultado);
+		assertEquals("Poker", resultado);
+		
+		//Hay Color
+		resultado = pokerStatus.verificar(diamantes1, diamantes11, diamantes3, diamantes4, diamantes5);
+
+		assertNotEquals("Trio", resultado);
+		assertEquals("Color", resultado);
+		
+	}
+	
+	
+	@Test
+	void noHayNada() {
+		
+		String resultado = pokerStatus.verificar(diamantes1, treboles1, diamantes3, corazones12, picas10);
+
+		assertEquals("Nada", resultado);
 		
 	}
 

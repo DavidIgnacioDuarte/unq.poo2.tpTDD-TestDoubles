@@ -7,7 +7,7 @@ import java.util.HashSet;
 public class PokerStatus {
 
 	
-	public boolean verificar(String carta1, String carta2, String carta3, String carta4, String carta5) {
+	public String verificar(String carta1, String carta2, String carta3, String carta4, String carta5) {
 		
 		ArrayList<String> cartas = new ArrayList<String>();
 		cartas.add(carta1);
@@ -17,27 +17,36 @@ public class PokerStatus {
 		cartas.add(carta5);
 		
 		ArrayList<Integer> numerosCartas = new ArrayList<Integer>();
+		ArrayList<String> palosCartas = new ArrayList<String>();
+		
 		for(String carta:cartas) {
 			numerosCartas.add(this.numero(carta));
+			palosCartas.add(this.palo(carta));
 		}
 				
-		for(int numero:numerosCartas) {
-			
-			//Las ocurrencias que el numero actual tiene en las cartas
-			Integer ocurrencias = Collections.frequency(numerosCartas, numero);
-			
-			//Si dichas ocurrencias son 4, entonces hay Poker y se devuelve true
-			if(ocurrencias == 4) {
-				return true;
-			}
+		if (this.hayPoker(numerosCartas)) {
+			return "Poker";
 		}
-		
-		//Una vez recorrida la lista y nunca cumplida la condición del if, significa que no hay poker.
-		return false;
+		else if (this.hayColor(palosCartas)) {
+			return "Color";
+		}
+		else if (this.hayTrio(numerosCartas)) {
+			return "Trio";
+		}
+		else {
+			return "Nada";
+		}
 		
 	}
 	
 	
+	private String palo(String carta) {
+		
+		return carta.substring(carta.length()-1);
+		
+	}
+
+
 	private int numero(String carta) {
 		
 		String valorTexto;
@@ -53,6 +62,58 @@ public class PokerStatus {
 		}
 		
 		return numero;
+		
+	}
+	
+	
+	private boolean hayPoker(ArrayList<Integer> numerosCartas) {
+		
+		for(int numero:numerosCartas) {
+			
+			//Las ocurrencias que el numero actual tiene en las cartas
+			Integer ocurrencias = Collections.frequency(numerosCartas, numero);
+			
+			//Si dichas ocurrencias son 4, entonces hay Poker y se devuelve true
+			if(ocurrencias == 4) {
+				return true;
+			}
+		}
+		
+		return false;
+		
+	}
+	
+	
+	private boolean hayColor(ArrayList<String> palosCartas) {
+		
+		for (String palo:palosCartas) {
+			
+			Integer vecesEnLaLista = Collections.frequency(palosCartas, palo);
+
+			if (vecesEnLaLista == 5) {
+				return true;
+			}
+		}
+		
+		return false ;
+		
+	}
+	
+	
+	private boolean hayTrio(ArrayList<Integer> numerosCartas) {
+		
+		for(int numero:numerosCartas) {
+			
+			//Las ocurrencias que el numero actual tiene en las cartas
+			Integer ocurrencias = Collections.frequency(numerosCartas, numero);
+			
+			//Si dichas ocurrencias son 4, entonces hay Poker y se devuelve true
+			if(ocurrencias == 3) {
+				return true;
+			}
+		}
+		
+		return false;
 		
 	}
 	
