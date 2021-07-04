@@ -1,7 +1,10 @@
 package poquer;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,20 +34,54 @@ class PokerStatusTest {
 		
 		pokerStatus = PokerStatus.getPokerStatus();
 		
-		picas1 = new Carta("P", "1");
-		picas2 = new Carta("P", "2");
-		corazones3 = new Carta("C", "3");
-		corazones1 = new Carta("C", "1");
-		treboles1 = new Carta("T", "1");
-		diamantes1 = new Carta("D", "1");
-		diamantes3 = new Carta("D", "3");
+		picas1 = mock(Carta.class);
+		picas2 = mock(Carta.class);
+		corazones3 = mock(Carta.class);
+		corazones1 = mock(Carta.class);
+		corazones12 = mock(Carta.class);
+		treboles1 = mock(Carta.class);
+		diamantes1 = mock(Carta.class);
+		diamantes3 = mock(Carta.class);
 		
-		diamantes11 = new Carta("D", "J");
-		corazones12 = new Carta("C", "Q");
-		picas10 = new Carta("P", "10");
+		diamantes11 = mock(Carta.class);
+		picas10 = mock(Carta.class);
 		
-		diamantes4 = new Carta("D", "4");
-		diamantes5 = new Carta("D", "5");
+		diamantes4 = mock(Carta.class);
+		diamantes5 = mock(Carta.class);
+		
+		//PALOS
+		when(picas1.getPalo()).thenReturn("P");
+		when(picas2.getPalo()).thenReturn("P");
+		when(picas10.getPalo()).thenReturn("P");
+		
+		when(corazones1.getPalo()).thenReturn("C");
+		when(corazones3.getPalo()).thenReturn("C");
+		
+		when(treboles1.getPalo()).thenReturn("T");
+		
+		when(diamantes1.getPalo()).thenReturn("D");
+		when(diamantes3.getPalo()).thenReturn("D");
+		when(diamantes11.getPalo()).thenReturn("D");
+		when(diamantes4.getPalo()).thenReturn("D");
+		when(diamantes5.getPalo()).thenReturn("D");
+		
+		
+		//VALORES
+		when(picas1.getValorNumerico()).thenReturn(1);
+		when(picas2.getValorNumerico()).thenReturn(2);
+		when(picas10.getValorNumerico()).thenReturn(10);
+		
+		when(corazones1.getValorNumerico()).thenReturn(1);
+		when(corazones3.getValorNumerico()).thenReturn(3);
+		when(corazones12.getValorNumerico()).thenReturn(12);
+		
+		when(treboles1.getValorNumerico()).thenReturn(1);
+		
+		when(diamantes1.getValorNumerico()).thenReturn(1);
+		when(diamantes3.getValorNumerico()).thenReturn(3);
+		when(diamantes11.getValorNumerico()).thenReturn(11);
+		when(diamantes4.getValorNumerico()).thenReturn(4);
+		when(diamantes5.getValorNumerico()).thenReturn(5);
 		
 	}
 	

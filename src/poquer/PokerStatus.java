@@ -37,7 +37,7 @@ public class PokerStatus {
 		ArrayList<String> palosCartas = new ArrayList<String>();
 		
 		for(Carta carta:cartas) {
-			numerosCartas.add(carta.valorNumerico());
+			numerosCartas.add(carta.getValorNumerico());
 			palosCartas.add(carta.getPalo());
 		}
 				
@@ -98,7 +98,7 @@ public class PokerStatus {
 			//Las ocurrencias que el numero actual tiene en las cartas
 			int ocurrencias = Collections.frequency(numerosCartas, numero);
 			
-			//Si dichas ocurrencias son 4, entonces hay Poker y se devuelve true
+			//Si dichas ocurrencias son 3, entonces hay Trio y se devuelve true
 			if(ocurrencias == 3) {
 				return true;
 			}

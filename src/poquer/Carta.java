@@ -25,11 +25,11 @@ public class Carta {
 	}
 
 	public boolean tieneValorSuperior(Carta carta) {
-		return this.valorNumerico() > carta.valorNumerico();
+		return this.getValorNumerico() > carta.getValorNumerico();
 	}
 	
-	public Integer valorNumerico() {
-		return PokerStatus.getPokerStatus().getValores().indexOf(this.valor) + 1;
+	public Integer getValorNumerico() {
+		return PokerStatus.getPokerStatus().getValores().indexOf(this.getValor()) + 1;
 	}
 	
 }

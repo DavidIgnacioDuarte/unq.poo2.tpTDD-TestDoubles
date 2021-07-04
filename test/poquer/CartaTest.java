@@ -23,7 +23,7 @@ class CartaTest {
 		
 		assertEquals("D", diamantes12.getPalo());
 		assertEquals("Q", diamantes12.getValor());
-		assertEquals(12, diamantes12.valorNumerico());
+		assertEquals(12, diamantes12.getValorNumerico());
 		
 	}
 	
