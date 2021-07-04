@@ -1,15 +1,32 @@
 package poquer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 
 public class PokerStatus {
 
 	
-	public String verificar(String carta1, String carta2, String carta3, String carta4, String carta5) {
+	private static PokerStatus instance;
+	private List<String> valores = Arrays.asList("1","2","3","4","5","6","7","8","9","10","J","Q","K");
+	
+	
+	//SINGLETON POR LOS VALORES DE LOS PALOS
+	public static PokerStatus getPokerStatus() {
+		if(instance == null) {
+			instance = new PokerStatus();
+		}
+		return instance;
+	}
+	
+	public List<String> getValores() {
+		return this.valores;
+	}
+	
+	public String verificar(Carta carta1, Carta carta2, Carta carta3, Carta carta4, Carta carta5) {
 		
-		ArrayList<String> cartas = new ArrayList<String>();
+		ArrayList<Carta> cartas = new ArrayList<Carta>();
 		cartas.add(carta1);
 		cartas.add(carta2);
 		cartas.add(carta3);
@@ -19,9 +36,9 @@ public class PokerStatus {
 		ArrayList<Integer> numerosCartas = new ArrayList<Integer>();
 		ArrayList<String> palosCartas = new ArrayList<String>();
 		
-		for(String carta:cartas) {
-			numerosCartas.add(this.numero(carta));
-			palosCartas.add(this.palo(carta));
+		for(Carta carta:cartas) {
+			numerosCartas.add(carta.valorNumerico());
+			palosCartas.add(carta.getPalo());
 		}
 				
 		if (this.hayPoker(numerosCartas)) {
@@ -40,38 +57,12 @@ public class PokerStatus {
 	}
 	
 	
-	private String palo(String carta) {
-		
-		return carta.substring(carta.length()-1);
-		
-	}
-
-
-	private int numero(String carta) {
-		
-		String valorTexto;
-		int numero;
-		
-		if (carta.length() == 3) {
-			valorTexto = carta.substring(0,2);
-			numero = Integer.parseInt(valorTexto);
-		} 
-		else {
-			valorTexto = carta.substring(0,1);
-			numero = Integer.parseInt(valorTexto);
-		}
-		
-		return numero;
-		
-	}
-	
-	
 	private boolean hayPoker(ArrayList<Integer> numerosCartas) {
 		
 		for(int numero:numerosCartas) {
 			
 			//Las ocurrencias que el numero actual tiene en las cartas
-			Integer ocurrencias = Collections.frequency(numerosCartas, numero);
+			int ocurrencias = Collections.frequency(numerosCartas, numero);
 			
 			//Si dichas ocurrencias son 4, entonces hay Poker y se devuelve true
 			if(ocurrencias == 4) {
@@ -88,9 +79,9 @@ public class PokerStatus {
 		
 		for (String palo:palosCartas) {
 			
-			Integer vecesEnLaLista = Collections.frequency(palosCartas, palo);
+			int ocurrencias = Collections.frequency(palosCartas, palo);
 
-			if (vecesEnLaLista == 5) {
+			if (ocurrencias == 5) {
 				return true;
 			}
 		}
@@ -105,7 +96,7 @@ public class PokerStatus {
 		for(int numero:numerosCartas) {
 			
 			//Las ocurrencias que el numero actual tiene en las cartas
-			Integer ocurrencias = Collections.frequency(numerosCartas, numero);
+			int ocurrencias = Collections.frequency(numerosCartas, numero);
 			
 			//Si dichas ocurrencias son 4, entonces hay Poker y se devuelve true
 			if(ocurrencias == 3) {

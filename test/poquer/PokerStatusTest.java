@@ -9,42 +9,42 @@ class PokerStatusTest {
 
 	
 	PokerStatus pokerStatus;
-	String picas1;
-	String picas2;
-	String corazones3;
-	String corazones1;
-	String treboles1;
-	String diamantes1;
-	String diamantes3;
+	Carta picas1;
+	Carta picas2;
+	Carta corazones3;
+	Carta corazones1;
+	Carta treboles1;
+	Carta diamantes1;
+	Carta diamantes3;
 	
-	String diamantes11;
-	String corazones12;
-	String picas10;
+	Carta diamantes11;
+	Carta corazones12;
+	Carta picas10;
 	
-	String diamantes4;
-	String diamantes5;
+	Carta diamantes4;
+	Carta diamantes5;
 	
 	
 	//SETUP Y TEARDOWN A LA VEZ(AL SER BEFOREACH)//
 	@BeforeEach
 	void setUp() {
 		
-		pokerStatus = new PokerStatus();
+		pokerStatus = PokerStatus.getPokerStatus();
 		
-		picas1 = "1P";
-		picas2 = "2P";
-		corazones3 = "3C";
-		corazones1 = "1C";
-		treboles1 = "1T";
-		diamantes1 = "1D";
-		diamantes3 = "3D";
+		picas1 = new Carta("P", "1");
+		picas2 = new Carta("P", "2");
+		corazones3 = new Carta("C", "3");
+		corazones1 = new Carta("C", "1");
+		treboles1 = new Carta("T", "1");
+		diamantes1 = new Carta("D", "1");
+		diamantes3 = new Carta("D", "3");
 		
-		diamantes11 = "11D";
-		corazones12 = "12C";
-		picas10 = "10P";
+		diamantes11 = new Carta("D", "J");
+		corazones12 = new Carta("C", "Q");
+		picas10 = new Carta("P", "10");
 		
-		diamantes4 = "4D";
-		diamantes5 = "5D";
+		diamantes4 = new Carta("D", "4");
+		diamantes5 = new Carta("D", "5");
 		
 	}
 	
