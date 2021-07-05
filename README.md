@@ -13,3 +13,34 @@ Trabajo Práctico de la asignatura **Programación Orientada a Objetos II** sobre 
 
 
 
+## Mockito
+
+* En **Mockito**, puede indicarse que el **objeto mock** debe recibir un secuencia de mensajes particular en un orden preestablecido instanciando un **objeto** |InOrder|, pasándole al mismo los mocks que necesitan verificarse en orden. Ejemplo:
+
+```java
+List primero = mock(List.class);
+List segundo = mock(List.class);
+ 
+//usando cada lista mockeada
+primero.add("fue llamado primero");
+segundo.add("fue llamado segundo");
+ 
+//instanciación objeto inOrder, pasándole los mocks que necesitan verificarse en orden
+InOrder inOrder = inOrder(primero, segundo);
+ 
+//verficamos que firstMock ha sido invocado antes que secondMock
+inOrder.verify(primero).add("fue llamado primero");
+inOrder.verify(segundo).add("fue llamado segundo");
+```
+
+* Para que un **objeto mock** esté preparado para recibir algunos mensajes sin importar el orden o la
+obligatoriedad de recibirlos, podemos **programar** el comportamiento del mismo, indicando qué debe devolver cierto método.(Stubbing)
+
+* Es posible anidar envíos de mensajes con Mockito. Al crear el mock object, debe agregarse junto a la clase a mockear, como segundo argumento, el enumerativo **RETURNS_DEEP_STUBS**, que permite y limita a cada verificación, a trabajar sobre el último mock object de la cadena, de la siguiente forma:
+
+```java
+ClasePrueba clase = mock(ClasePrueba.class, Mockito.RETURNS_DEEP_STUBS);
+```
+
+
+

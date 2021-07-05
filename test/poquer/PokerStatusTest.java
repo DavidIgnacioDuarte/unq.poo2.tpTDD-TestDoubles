@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -205,6 +208,34 @@ class PokerStatusTest {
 		
 	}
 
+	
+	@Test
+	void jugadas() {
+		
+		List<Carta> poker = Arrays.asList(diamantes1, treboles1, corazones12, picas1, corazones1);
+		List<Carta> color = Arrays.asList(diamantes11, diamantes1, diamantes3, diamantes4, diamantes5);
+		List<Carta> trio = Arrays.asList(diamantes1, treboles1, corazones12, picas1, diamantes5);
+		List<Carta> nada = Arrays.asList(diamantes1, treboles1, corazones12, corazones3, diamantes4);
+		
+		assertTrue(pokerStatus.leGanaA(poker, color));
+		
+		assertTrue(pokerStatus.leGanaA(poker, trio));
+		
+		assertTrue(pokerStatus.leGanaA(poker, nada));
+		
+		assertTrue(pokerStatus.leGanaA(color, trio));
+		
+		assertTrue(pokerStatus.leGanaA(color, nada));
+		
+		assertTrue(pokerStatus.leGanaA(trio, nada));
+		
+		assertFalse(pokerStatus.leGanaA(color, poker));
+		assertFalse(pokerStatus.leGanaA(trio, poker));
+		assertFalse(pokerStatus.leGanaA(nada, poker));
+		
+	}
+	
+	
 }
 
 
