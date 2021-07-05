@@ -13,7 +13,7 @@ Trabajo Práctico de la asignatura **Programación Orientada a Objetos II** sobre 
 
 
 
-## Mockito
+### Mockito
 
 * En **Mockito**, puede indicarse que el **objeto mock** debe recibir un secuencia de mensajes particular en un orden preestablecido instanciando un **objeto** |InOrder|, pasándole al mismo los mocks que necesitan verificarse en orden. Ejemplo:
 
@@ -43,4 +43,18 @@ ClasePrueba clase = mock(ClasePrueba.class, Mockito.RETURNS_DEEP_STUBS);
 ```
 
 
+### Test Doubles
+
+* **Test Doubles** es un concepto que hace referencia a aquellos tests unitarios en los cuales **todos** los objetos externos al **SUT** (System Under Testing), es decir, los colaboradores, son falsos. Para esto se hace uso de **Doubles** que imiten su estructura y comportamiento para verificar sólo llamadas y/o para que devuelvan en alguno de sus métodos, algo en específico que podamos programar al momento de testear.
+
+* Los siguientes son los tipos de **Doubles** a usar en nuestros tests:
+
+
+1. **Dummy Object:** Se utiliza el objeto sólo para que ocupe un lugar, pero **no** es utilizado. Generalmente usados para rellenar argumentos esperados.
+
+2. **Stub**: Se utiliza el objeto para controlar la ejecución de algunos caminos difíciles de lograr para **inputs indirectos**; objetos utilizados para devolver ciertas respuestas a los mensajes que se les envíen. Existen 2 tipos de stubs: **OBSERVER** -> crear objeto que siempre responda a lo mismo (específico) - **SABOTEUR** -> Objeto que "se rompa" (lanzar excepción).
+
+3. **Spy:** Utilizado para outputs indirectos. El SUT interactúa con un objeto externo y queremos testear esa interacción. En Mockito, con **verify**.
+
+4. **Fake Object:** Objeto al que aún no tenemos acceso. A diferencia de los anteriores, este objeto tiene una lógica mas compleja y hasta podria necesitar test propios.
 
